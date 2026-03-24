@@ -64,8 +64,8 @@ class Class1Module11 extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   // Simple login system idea
-
                   // Phone Controller Conditions
+
                   if (phoneController.text.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text("Enter phone number")),
@@ -114,7 +114,6 @@ class Class1Module11 extends StatelessWidget {
                 alignment: Alignment.center,
                 height: 70,
                 width: 200,
-                child: Text("Container Text"),
                 decoration: BoxDecoration(
                   color: Colors.red,
                   borderRadius: BorderRadius.circular(20),
@@ -131,6 +130,7 @@ class Class1Module11 extends StatelessWidget {
                     ),
                   ],
                 ),
+                child: Text("Container Text"),
               ),
             ],
           ),
