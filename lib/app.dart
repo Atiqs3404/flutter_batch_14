@@ -6,6 +6,8 @@ import 'package:flutter_application_test/module_11/class_2.dart';
 import 'package:flutter_application_test/module_11/class_3.dart';
 import 'package:flutter_application_test/module_12/class_1.dart';
 import 'package:flutter_application_test/module_12/class_1_grid_view.dart';
+import 'package:flutter_application_test/module_12/class_2_list_view.dart';
+import 'package:flutter_application_test/module_12/class_2_list_view_expanded.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -44,7 +46,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
 
-      home: Class1GridViewModule12(),
+      home: Class2ListViewExpanded(),
     );
   }
 }
