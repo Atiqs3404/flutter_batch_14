@@ -9,6 +9,7 @@ import 'package:flutter_application_test/module_12/class_1_grid_view.dart';
 import 'package:flutter_application_test/module_12/class_2_list_view.dart';
 import 'package:flutter_application_test/module_12/class_2_list_view_expanded.dart';
 import 'package:flutter_application_test/module_13/class_1_custom_widget_usage.dart';
+import 'package:flutter_application_test/module_13/class_2_alert_types.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
 
-      home: Class1CustomWidgetUsage(),
+      home: Class2AlertDialog(),
     );
   }
 }
