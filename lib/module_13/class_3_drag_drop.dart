@@ -7,6 +7,7 @@ class DragDrop extends StatelessWidget {
   Widget build(BuildContext context) {
     List<String> fruits = ["Apple", "Banana", "Orange", "Mango"];
     List<String> basket = [];
+
     return Scaffold(
       appBar: AppBar(title: Text('DragDrop shopping')),
       body: Column(
@@ -15,6 +16,7 @@ class DragDrop extends StatelessWidget {
             height: 160,
             child: Row(
               children: fruits.map((fruit) {
+                // Draggable Section
                 return Draggable(
                   data: fruit,
                   feedback: Material(
@@ -33,13 +35,15 @@ class DragDrop extends StatelessWidget {
               }).toList(),
             ),
           ),
+
           SizedBox(height: 50),
+
+          // Target Container
           DragTarget<String>(
             onAccept: (receivedItem) {
               basket.add(receivedItem);
             },
-            //context, candidateData, rejectedData)
-            builder: (context, cData, rData) {
+            builder: (context, candidData, rejectedData) {
               return Container(
                 height: 200,
                 width: double.infinity,
@@ -48,8 +52,9 @@ class DragDrop extends StatelessWidget {
                   border: Border.all(width: 3, color: Colors.orange),
                   borderRadius: BorderRadius.circular(12),
                 ),
+
                 child: basket.isEmpty
-                    ? Center(child: Text('Drag items here to add to basket'))
+                    ? Center(child: Text("Drag item here to add to basket"))
                     : Wrap(
                         children: basket
                             .map(
