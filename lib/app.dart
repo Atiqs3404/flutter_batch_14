@@ -14,6 +14,8 @@ import 'package:flutter_application_test/module_13/class_3_drag_drop.dart';
 import 'package:flutter_application_test/module_13/class_3_draggable.dart';
 import 'package:flutter_application_test/module_13/class_4_animation.dart';
 import 'package:flutter_application_test/module_14/class_1_widget_lifecycle.dart';
+import 'package:flutter_application_test/module_14/class_2_navigation.dart';
+import 'package:flutter_application_test/module_14/test_2_navigation.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -52,7 +54,27 @@ class MyApp extends StatelessWidget {
         ),
       ),
 
-      home: Class1WidgetLifecycle(),
+      routes: {
+        "/home": (context) => Home(),
+        "/drag_and_drop": (context) => DragDrop(),
+        "/alert": (context) => Class2AlertDialog(),
+        "/listView": (context) => Class2ListViewModule12(),
+        "/navigation": (context) => Class2Navigation(),
+
+        // Receiving parameter values through name route
+        "/test2": (context) {
+          final arg =
+              ModalRoute.of(context)!.settings.arguments
+                  as Map<String, dynamic>;
+          return Test2Navigation(
+            name: arg["name"],
+            price: arg["price"],
+            onClick: arg["onClick"],
+          );
+        },
+      },
+
+      initialRoute: "/navigation",
     );
   }
 }
