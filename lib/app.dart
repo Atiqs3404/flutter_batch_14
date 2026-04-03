@@ -12,6 +12,7 @@ import 'package:flutter_application_test/module_13/class_1_custom_widget_usage.d
 import 'package:flutter_application_test/module_13/class_2_alert_types.dart';
 import 'package:flutter_application_test/module_13/class_3_drag_drop.dart';
 import 'package:flutter_application_test/module_13/class_3_draggable.dart';
+import 'package:flutter_application_test/module_13/class_4_animation.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
 
-      home: DragDrop(),
+      home: Class4Animation(),
     );
   }
 }

@@ -5,26 +5,26 @@ class Class3Draggable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, String>> destinationList = [
+    List<Map<String, String>> cartItems = [
       {
-        "img":
-            "https://plus.unsplash.com/premium_photo-1718035557075-5111d9d906d2?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "name": "Paris",
+        'img':
+            "https://images.unsplash.com/photo-1584306670957-acf935f5033c?q=80&w=686&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        'name': 'Apple',
       },
       {
-        "img":
-            "https://plus.unsplash.com/premium_photo-1680339680335-7e3b8572fc00?q=80&w=1075&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "name": "Maldives",
+        'img':
+            "https://plus.unsplash.com/premium_photo-1724250081106-4bb1be9bf950?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        'name': 'Banana',
       },
       {
-        "img":
-            "https://images.unsplash.com/photo-1489516408517-0c0a15662682?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "name": "Dubai",
+        'img':
+            "https://plus.unsplash.com/premium_photo-1670512181061-e24282f7ee78?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        'name': 'Orange',
       },
       {
-        "img":
-            "https://images.unsplash.com/photo-1604999333679-b86d54738315?q=80&w=1025&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "name": "Bali",
+        'img':
+            "https://images.unsplash.com/photo-1673010960635-d0d1ad81b90a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        'name': 'Mango',
       },
     ];
 
@@ -32,18 +32,18 @@ class Class3Draggable extends StatelessWidget {
       appBar: AppBar(title: Text("Shopping Cart")),
 
       body: ListView.builder(
-        itemCount: destinationList.length,
+        itemCount: cartItems.length,
 
         itemBuilder: (context, index) {
-          final item = destinationList[index];
+          final item = cartItems[index];
 
           return Dismissible(
             key: Key(item["name"]!),
 
-            onDismissed: (direction) {
+            confirmDismiss: (direction) async {
               if (direction == DismissDirection.startToEnd) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("${item["name"]} quantity increase")),
+                  SnackBar(content: Text("${item["name"]} quantity increased")),
                 );
               } else if (direction == DismissDirection.endToStart) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -54,21 +54,21 @@ class Class3Draggable extends StatelessWidget {
 
             background: Container(
               color: Colors.green,
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              child: Icon(Icons.add, size: 30),
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Icon(Icons.add, color: Colors.white),
             ),
 
             secondaryBackground: Container(
-              color: Colors.deepOrange,
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              child: Icon(Icons.delete, size: 30),
+              color: Colors.red,
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Icon(Icons.delete, color: Colors.white),
             ),
 
             child: Card(
               child: ListTile(
-                leading: Image.network(item["img"]!),
                 title: Text(item["name"]!),
-                trailing: Text("Qty 2", style: TextStyle(fontSize: 20)),
+                leading: Image.network(item["img"]!),
+                trailing: Text("QTY: 2", style: TextStyle(fontSize: 16)),
               ),
             ),
           );
