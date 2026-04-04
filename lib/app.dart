@@ -17,6 +17,7 @@ import 'package:flutter_application_test/module_14/class_1_widget_lifecycle.dart
 import 'package:flutter_application_test/module_14/class_2_navigation.dart';
 import 'package:flutter_application_test/module_14/class_3.dart';
 import 'package:flutter_application_test/module_14/test_2_navigation.dart';
+import 'package:flutter_application_test/module_15/class_1_bottom_nav.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -75,9 +76,11 @@ class MyApp extends StatelessWidget {
         },
 
         "/bar": (context) => Class3Module14(),
+        "/botNav": (context) => Class1BottomNav(),
+        "/medQuery": (context) => Class3Module11(),
       },
 
-      initialRoute: "/bar",
+      initialRoute: "/medQuery",
     );
   }
 }
