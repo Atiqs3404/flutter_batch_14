@@ -15,6 +15,7 @@ import 'package:flutter_application_test/module_13/class_3_draggable.dart';
 import 'package:flutter_application_test/module_13/class_4_animation.dart';
 import 'package:flutter_application_test/module_14/class_1_widget_lifecycle.dart';
 import 'package:flutter_application_test/module_14/class_2_navigation.dart';
+import 'package:flutter_application_test/module_14/class_3.dart';
 import 'package:flutter_application_test/module_14/test_2_navigation.dart';
 
 class MyApp extends StatelessWidget {
@@ -72,9 +73,11 @@ class MyApp extends StatelessWidget {
             onClick: arg["onClick"],
           );
         },
+
+        "/bar": (context) => Class3Module14(),
       },
 
-      initialRoute: "/navigation",
+      initialRoute: "/bar",
     );
   }
 }
