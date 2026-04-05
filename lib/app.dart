@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_test/home.dart';
 import 'package:flutter_application_test/module_10/flutter_buttons.dart';
@@ -18,69 +19,87 @@ import 'package:flutter_application_test/module_14/class_2_navigation.dart';
 import 'package:flutter_application_test/module_14/class_3.dart';
 import 'package:flutter_application_test/module_14/test_2_navigation.dart';
 import 'package:flutter_application_test/module_15/class_1_bottom_nav.dart';
+import 'package:flutter_application_test/module_15/class_3_money_management.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Flutter Batch 14",
+    //Set the fit size (Find your UI design, look at the dimensions of the device screen and fill it in,unit in dp)
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      // Use builder only if you need to use library outside ScreenUtilInit context
+      builder: (_, child) {
+        return MaterialApp(
+          useInheritedMediaQuery: true,
+          locale: DevicePreview.locale(context),
+          builder: DevicePreview.appBuilder,
 
-      theme: ThemeData(
-        brightness: Brightness.light,
+          title: "Flutter Batch 14",
 
-        // brightness: Brightness.dark,
-        primaryColor: Colors.grey.shade300,
+          theme: ThemeData(
+            brightness: Brightness.light,
 
-        primarySwatch: Colors.deepOrange,
+            // brightness: Brightness.dark,
+            primaryColor: Colors.grey.shade300,
 
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.deepOrange,
-          centerTitle: true,
-          titleTextStyle: Theme.of(context).textTheme.titleLarge,
-        ),
+            primarySwatch: Colors.deepOrange,
 
-        // textTheme: TextTheme(titleLarge: TextStyle(fontSize: 32), ),
-        inputDecorationTheme: InputDecorationTheme(
-          hintStyle: TextStyle(fontSize: 18),
-          labelStyle: TextStyle(fontSize: 20),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
-        ),
+            appBarTheme: AppBarTheme(
+              backgroundColor: Colors.deepOrange,
+              centerTitle: true,
+              titleTextStyle: Theme.of(context).textTheme.titleLarge,
+            ),
 
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.deepOrange,
-            foregroundColor: Colors.white,
+            // textTheme: TextTheme(titleLarge: TextStyle(fontSize: 32), ),
+            inputDecorationTheme: InputDecorationTheme(
+              hintStyle: TextStyle(fontSize: 18),
+              labelStyle: TextStyle(fontSize: 20),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(25),
+              ),
+            ),
+
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepOrange,
+                foregroundColor: Colors.white,
+              ),
+            ),
           ),
-        ),
-      ),
 
-      routes: {
-        "/home": (context) => Home(),
-        "/drag_and_drop": (context) => DragDrop(),
-        "/alert": (context) => Class2AlertDialog(),
-        "/listView": (context) => Class2ListViewModule12(),
-        "/navigation": (context) => Class2Navigation(),
+          routes: {
+            "/home": (context) => Home(),
+            "/drag_and_drop": (context) => DragDrop(),
+            "/alert": (context) => Class2AlertDialog(),
+            "/listView": (context) => Class2ListViewModule12(),
+            "/navigation": (context) => Class2Navigation(),
 
-        // Receiving parameter values through name route
-        "/test2": (context) {
-          final arg =
-              ModalRoute.of(context)!.settings.arguments
-                  as Map<String, dynamic>;
-          return Test2Navigation(
-            name: arg["name"],
-            price: arg["price"],
-            onClick: arg["onClick"],
-          );
-        },
+            // Receiving parameter values through name route
+            "/test2": (context) {
+              final arg =
+                  ModalRoute.of(context)!.settings.arguments
+                      as Map<String, dynamic>;
+              return Test2Navigation(
+                name: arg["name"],
+                price: arg["price"],
+                onClick: arg["onClick"],
+              );
+            },
 
-        "/bar": (context) => Class3Module14(),
-        "/botNav": (context) => Class1BottomNav(),
-        "/medQuery": (context) => Class3Module11(),
+            "/bar": (context) => Class3Module14(),
+            "/botNav": (context) => Class1BottomNav(),
+            "/medQuery": (context) => Class3Module11(),
+            "/moneyManage": (context) => MoneyManagement(),
+          },
+
+          initialRoute: "/moneyManage",
+        );
       },
-
-      initialRoute: "/medQuery",
     );
   }
 }
