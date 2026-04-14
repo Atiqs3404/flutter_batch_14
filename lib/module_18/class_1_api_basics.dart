@@ -46,7 +46,7 @@ class _Class1ApiBasicsState extends State<Class1ApiBasics> {
           crossAxisCount: 2,
           crossAxisSpacing: 10,
           mainAxisSpacing: 5,
-          childAspectRatio: 1,
+          childAspectRatio: 0.8,
         ),
         itemCount: products.length,
         itemBuilder: (context, index) {
