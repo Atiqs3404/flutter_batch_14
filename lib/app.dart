@@ -20,6 +20,7 @@ import 'package:flutter_application_test/module_14/class_3.dart';
 import 'package:flutter_application_test/module_14/test_2_navigation.dart';
 import 'package:flutter_application_test/module_15/class_1_bottom_nav.dart';
 import 'package:flutter_application_test/module_15/class_3_money_management.dart';
+import 'package:flutter_application_test/module_18/class_1_api_basics.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyApp extends StatelessWidget {
@@ -95,9 +96,10 @@ class MyApp extends StatelessWidget {
             "/botNav": (context) => Class1BottomNav(),
             "/medQuery": (context) => Class3Module11(),
             "/moneyManage": (context) => MoneyManagement(),
+            "/apiBasics": (context) => Class1ApiBasics(),
           },
 
-          initialRoute: "/moneyManage",
+          initialRoute: "/apiBasics",
         );
       },
     );
