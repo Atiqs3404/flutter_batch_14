@@ -36,4 +36,56 @@ class ProductController {
       return false;
     }
   }
+
+  Future<bool> createProduct(
+    // Products product
+  ) async {
+    final url = Uri.parse(Urls.createProduct);
+
+    final response = await http.post(
+      url,
+
+      // headers: {"Content-Type": "application/json"},
+
+      // body: jsonEncode({
+      //   "id": DateTime.now().microsecondsSinceEpoch,
+      //   "title": product.title,
+      //   "images": product.images,
+      //   "price": product.price,
+      // }),
+    );
+
+    if (response.statusCode == 200) {
+      getProducts();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> updateProduct(
+    // Products product
+  ) async {
+    final url = Uri.parse(Urls.createProduct);
+
+    final response = await http.put(
+      url,
+
+      // headers: {"Content-Type": "application/json"},
+
+      // body: jsonEncode({
+      //   "id": DateTime.now().microsecondsSinceEpoch,
+      //   "title": product.title,
+      //   "images": product.images,
+      //   "price": product.price,
+      // }),
+    );
+
+    if (response.statusCode == 200) {
+      getProducts();
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
