@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_test/module_18/CRUD/controller/productController.dart';
+import 'package:flutter_application_test/module_18/CRUD/model/productModel.dart';
 import 'package:http/http.dart' as http;
 
 class Crud extends StatefulWidget {
@@ -17,7 +18,7 @@ class _CrudState extends State<Crud> {
   Future fetchData() async {
     await productController.getProducts();
 
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   @override
@@ -25,6 +26,98 @@ class _CrudState extends State<Crud> {
     super.initState();
 
     fetchData();
+  }
+
+  void productDialog(bool isUpdate, {Products? product}) {
+    TextEditingController productIdController = TextEditingController();
+    TextEditingController productTitleController = TextEditingController();
+    TextEditingController productPriceController = TextEditingController();
+    TextEditingController productImageController = TextEditingController();
+
+    if (isUpdate) {
+      productIdController.text = product!.id.toString();
+      productTitleController.text = product.title!;
+      productPriceController.text = product.price.toString();
+      productImageController.text = product.images!.first;
+    }
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(isUpdate ? "Update product" : "Add product"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: productIdController,
+              decoration: InputDecoration(labelText: "Id"),
+            ),
+
+            SizedBox(height: 10),
+
+            TextField(
+              controller: productTitleController,
+              decoration: InputDecoration(labelText: "Title"),
+            ),
+
+            SizedBox(height: 10),
+
+            TextField(
+              controller: productPriceController,
+              decoration: InputDecoration(labelText: "price"),
+            ),
+
+            SizedBox(height: 10),
+
+            TextField(
+              controller: productImageController,
+              decoration: InputDecoration(labelText: "Image"),
+            ),
+
+            SizedBox(height: 5),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("Cancel"),
+                ),
+
+                ElevatedButton(
+                  onPressed: () async {
+                    if (isUpdate) {
+                      productController.createProduct(
+                        // Products(
+                        //   id: int.parse(productIdController.text),
+                        //   title: productTitleController.text,
+                        //   price: double.parse(productPriceController.text),
+                        //   images: [productImageController.text],
+                        // ),
+                      );
+                    } else {
+                      productController.updateProduct(
+                        // Products(
+                        //   id: int.parse(productIdController.text),
+                        //   title: productTitleController.text,
+                        //   price: double.parse(productPriceController.text),
+                        //   images: [productImageController.text],
+                        // ),
+                      );
+                    }
+                    await fetchData();
+                    Navigator.pop(context);
+                  },
+                  child: Text("Submit"),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -73,14 +166,17 @@ class _CrudState extends State<Crud> {
 
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          productDialog(true, product: item);
+                        },
                         icon: Icon(Icons.edit, color: Colors.deepOrange),
                       ),
                       IconButton(
                         onPressed: () {
                           productController
                               .deleteProduct(item.id.toString())
-                              .then((value) {
+                              .then((value) async {
+                                await fetchData();
                                 if (value) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(content: Text("Product deleted")),
@@ -101,6 +197,13 @@ class _CrudState extends State<Crud> {
             ),
           );
         },
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          productDialog(false);
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
