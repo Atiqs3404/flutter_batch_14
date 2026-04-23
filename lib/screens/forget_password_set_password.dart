@@ -2,18 +2,19 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager/screens/forget_password_otp_verify.dart';
 import 'package:task_manager/screens/login_screen.dart';
+import 'package:task_manager/screens/sign_up_screen.dart';
 import 'package:task_manager/utils/app_colors.dart';
 import 'package:task_manager/widgets/screen_background.dart';
 
-class ForgetPasswordEmailVerify extends StatefulWidget {
-  const ForgetPasswordEmailVerify({super.key});
+class ForgetPasswordSetPassword extends StatefulWidget {
+  const ForgetPasswordSetPassword({super.key});
 
   @override
-  State<ForgetPasswordEmailVerify> createState() =>
-      _ForgetPasswordEmailVerifyState();
+  State<ForgetPasswordSetPassword> createState() =>
+      _ForgetPasswordSetPasswordState();
 }
 
-class _ForgetPasswordEmailVerifyState extends State<ForgetPasswordEmailVerify> {
+class _ForgetPasswordSetPasswordState extends State<ForgetPasswordSetPassword> {
   void _onTapLogin() {
     Navigator.push(
       context,
@@ -32,14 +33,14 @@ class _ForgetPasswordEmailVerifyState extends State<ForgetPasswordEmailVerify> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Your Email Address",
+                "Set Password",
                 style: Theme.of(context).textTheme.titleLarge,
               ),
 
               SizedBox(height: 10),
 
               Text(
-                "A 6 digit verification code will be sent to your email address",
+                "Minimum length password 8 character with Letter and number combination",
                 style: Theme.of(
                   context,
                 ).textTheme.bodyLarge!.copyWith(color: Colors.grey.shade600),
@@ -47,17 +48,25 @@ class _ForgetPasswordEmailVerifyState extends State<ForgetPasswordEmailVerify> {
 
               SizedBox(height: 25),
 
-              TextFormField(decoration: InputDecoration(hintText: "Email")),
+              TextFormField(
+                obscureText: true,
+                decoration: InputDecoration(hintText: "Password"),
+              ),
+
+              SizedBox(height: 10),
+
+              TextFormField(
+                obscureText: true,
+                decoration: InputDecoration(hintText: "Confirm Password"),
+              ),
 
               SizedBox(height: 20),
 
               FilledButton(
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => ForgetPasswordOtpVerify(),
-                    ),
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
                   );
                 },
                 child: Icon(Icons.arrow_circle_right_outlined),
