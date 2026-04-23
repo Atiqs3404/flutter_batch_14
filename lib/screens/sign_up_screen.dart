@@ -1,7 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:task_manager/data/models/api_response.dart';
+import 'package:task_manager/data/services/api_caller.dart';
 import 'package:task_manager/screens/login_screen.dart';
 import 'package:task_manager/utils/app_colors.dart';
+import 'package:task_manager/utils/urls.dart';
 import 'package:task_manager/widgets/screen_background.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -19,6 +22,55 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _mobileController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  bool isLoading = false;
+
+  _clearTextField() {
+    _emailController.clear();
+    _firstNameController.clear();
+    _lastNameController.clear();
+    _mobileController.clear();
+    _passwordController.clear();
+  }
+
+  Future<void> _signUp() async {
+    Map<String, dynamic> requestBody = {
+      "email": _emailController.text,
+      "firstName": _firstNameController.text,
+      "lastName": _lastNameController.text,
+      "mobile": _mobileController.text,
+      "password": _passwordController.text,
+    };
+
+    setState(() {
+      isLoading = true;
+    });
+
+    final ApiResponse response = await ApiCaller.postRequest(
+      URL: Urls.SignUpUrl,
+      body: requestBody,
+    );
+
+    setState(() {
+      isLoading = false;
+    });
+
+    if (response.isSuccess) {
+      _clearTextField();
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Signed up successfully")));
+
+      Future.delayed(Duration(seconds: 1));
+
+      _onTapLogin();
+    } else {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(response.responseData["data"])));
+    }
+  }
 
   void _onTapLogin() {
     Navigator.push(
@@ -122,12 +174,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                     SizedBox(height: 20),
 
-                    FilledButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {}
-                      },
-                      child: Icon(Icons.arrow_circle_right_outlined),
-                    ),
+                    isLoading
+                        ? Center(child: CircularProgressIndicator())
+                        : FilledButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                _signUp();
+                              }
+                            },
+                            child: Icon(Icons.arrow_circle_right_outlined),
+                          ),
 
                     SizedBox(height: 35),
 

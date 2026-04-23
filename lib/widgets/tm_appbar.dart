@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/controller/auth_controller.dart';
 import 'package:task_manager/utils/app_colors.dart';
 
 class TmAppbar extends StatelessWidget implements PreferredSize {
@@ -23,14 +24,14 @@ class TmAppbar extends StatelessWidget implements PreferredSize {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Atiq Hasan Sani",
+                "${AuthController.userModel!.firstName} ${AuthController.userModel!.lastName}",
                 style: Theme.of(
                   context,
                 ).textTheme.titleMedium!.copyWith(color: Colors.white),
               ),
 
               Text(
-                "atiqs7540@gmail.com",
+                AuthController.userModel!.email.toString(),
                 style: Theme.of(
                   context,
                 ).textTheme.titleSmall!.copyWith(color: Colors.white),
