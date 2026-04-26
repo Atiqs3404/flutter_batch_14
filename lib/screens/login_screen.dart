@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     final ApiResponse response = await ApiCaller.postRequest(
-      URL: Urls.SignInUrl,
+      URL: Urls.signInUrl,
       body: requestBody,
     );
 

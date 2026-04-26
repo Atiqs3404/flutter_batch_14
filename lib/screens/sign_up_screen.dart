@@ -47,7 +47,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     });
 
     final ApiResponse response = await ApiCaller.postRequest(
-      URL: Urls.SignUpUrl,
+      URL: Urls.signUpUrl,
       body: requestBody,
     );
 
